@@ -1,0 +1,8 @@
+# pycharm
+.idea
+
+# virtual env config
+venv
+
+# environment variable
+.env
