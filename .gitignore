@@ -1,3 +1,6 @@
+# C extensions
+*.so
+
 # pycharm
 .idea
 
@@ -6,3 +9,6 @@ venv
 
 # environment variable
 .env
+
+# Flask stuff:
+instance/
