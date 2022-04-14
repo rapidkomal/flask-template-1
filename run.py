@@ -1,6 +1,7 @@
 import logging
 import os
 
+from dotenv import load_dotenv
 from flask import Flask
 
 from app.v1.project import project
@@ -8,6 +9,8 @@ from app.v1.project import project
 
 # def create_app():
 app = Flask(__name__)
+
+load_dotenv()
 
 # Logger
 logging.basicConfig(level=logging.DEBUG,
