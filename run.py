@@ -6,8 +6,8 @@ from flask import Flask
 
 from app.v1.project import project
 
+from extensions import make_celery, db
 
-# def create_app():
 app = Flask(__name__)
 
 load_dotenv()
@@ -23,16 +23,44 @@ LOGGER = logging.getLogger()
 app.config.update(
     FLASK_ENV=os.getenv('FLASK_ENV'),
     DEBUG=os.getenv('DEBUG'),
+    CELERY_RESULT_BACKEND=os.getenv('CELERY_RESULT_BACKEND'),
+    CELERY_BROKER_URL=os.getenv('CELERY_BROKER_URL')
 )
 
+# Setup MySQL Settings
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_ECHO'] = bool(os.getenv('SQLALCHEMY_ECHO'))
+app.config['SQLALCHEMY_RECORD_QUERIES'] = bool(
+    os.getenv('SQLALCHEMY_RECORD_QUERIES'))
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv(
+    'SQLALCHEMY_TRACK_MODIFICATIONS')
+
+db.init_app(app)
+
+
+def _dispose_db_pool():
+    with app.app_context():
+        db.engine.dispose()
+
+
+try:
+    from uwsgidecorators import postfork
+
+    postfork(_dispose_db_pool)
+except ImportError:
+    # Implement fallback when running outside of uwsgi...
+    raise
+
+
 @app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+def hello_world():
+    return 'Hello World!!'
+
 
 # Register blueprints
 app.register_blueprint(project)
 
-    # return app
+celery = make_celery(app)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

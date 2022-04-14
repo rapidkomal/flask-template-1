@@ -1,4 +1,7 @@
 # Flask Template
+<p align="center">
+  <a href="https://www.rapidinnovation.io/" target="blank"><img src="static/images/ri_logo.jpeg" width="320" alt="RapidInnovation Logo" /></a>
+</p>
 
 Checkout *requirements.txt* for libraries used.
 
