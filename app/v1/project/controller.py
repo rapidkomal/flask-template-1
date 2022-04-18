@@ -9,13 +9,10 @@ from extensions import db
 @project.post('/projects')
 def post():
     # Publisher.add('test')
-    db.session.add(Project(name='apoorv'))
+    # db.session.add(Project(name='apoorv'))
     # db.session.commit()
 
-    # result = add_together.delay(1,2)
-    # print(result)
-    # return {'data': 'post success'}
-    return 'asd'
+    return {'data': 'post success'}
 
 @project.get('/projects')
 def get():
