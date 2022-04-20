@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 
+from app.commands.example import register_commands
 from app.v1.project import project
 
 from extensions import make_celery, db
@@ -48,6 +49,8 @@ def hello_world():
 app.register_blueprint(project)
 
 celery = make_celery(app)
+
+register_commands(app)
 
 if __name__ == '__main__':
     app.run(debug=True)

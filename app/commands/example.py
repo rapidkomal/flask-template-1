@@ -24,5 +24,10 @@ def hello(name):
     print(f"Hello {name}")
 
 
+def register_commands(app):
+    @app.cli.command('test')
+    def test():
+        print('it works!')
+
 if __name__ == '__main__':
     hello()
