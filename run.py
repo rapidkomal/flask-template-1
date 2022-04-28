@@ -4,10 +4,12 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 
+
 from app.commands.example import register_commands
 from app.v1.project import project
 
 from extensions import make_celery, db
+from kafka import *
 
 app = Flask(__name__)
 
@@ -42,7 +44,20 @@ db.init_app(app)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!!'
+    # consumer = KafkaConsumer(
+
+    #         "user.registrations",
+    #         bootstrap_servers=['0.0.0.0:9092'],
+    #         auto_offset_reset="latest",
+    #         enable_auto_commit=True,
+    #         group_id="tech-core-easy-1",
+    #         )
+   
+    # for message in consumer:
+    #         return (message)
+    return 'Hello Rapid!!'
+
+
 
 
 # Register blueprints
