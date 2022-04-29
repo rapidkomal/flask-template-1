@@ -2,11 +2,11 @@ from kafka import KafkaConsumer
 
 import sys
 
-bootstrap_servers = ['0.0.0.0:9092']
+bootstrap_servers = ['localhost:9092']
 
 topicName = 'users.verifications'
 
-consumer = KafkaConsumer (topicName, group_id ='tech-core-easy-1',bootstrap_servers =
+consumer = KafkaConsumer (topicName, group_id ='test-consumer-group',bootstrap_servers =
    bootstrap_servers)
 
 for msg in consumer:

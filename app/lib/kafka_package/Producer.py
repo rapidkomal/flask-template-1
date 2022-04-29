@@ -4,7 +4,8 @@ from json import dumps
 
 producer = KafkaProducer(
     value_serializer=lambda m: dumps(m).encode('utf-8'),
-    bootstrap_servers=['0.0.0.0:9092'])
+    bootstrap_servers=['localhost:9092'],
+    api_version=(2, 8, 1),)
 
 #if __name__ == "__main__":
 for i in range(1,10):
