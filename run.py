@@ -44,8 +44,8 @@ db.init_app(app)
 
 @app.route('/')
 def hello_world():
-    #return Consumer.consumer_function()
-    return 'Hello Rapid!!'
+    return Consumer.consumer_function()
+    #return 'Hello Rapid!!'
 
 
 
